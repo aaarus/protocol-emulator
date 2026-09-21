@@ -188,7 +188,7 @@ assign gpio_values = gpio_in;
     );
 
     imem u_imem(
-        .addr(pc_addr_out),
+        .addr(pc_addr_out[7:0]),
         .data_out(instruction)
     );
 

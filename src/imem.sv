@@ -23,26 +23,18 @@ endmodule */
 module imem #(
     parameter int DEPTH = 256
 ) (
-    input  logic [$clog2(DEPTH)-1:0] addr,
+    input logic [$clog2(DEPTH)-1:0] addr,
     output logic [15:0] data_out
 );
 
-    logic [15:0] mem [0:DEPTH-1];
-
-    integer i;
-
-    initial begin
-        // Initialize entire memory to zero
-        for (i = 0; i < DEPTH; i = i + 1)
-            mem[i] = 16'h0000;
-
-
-
-        
-        // Load program
-        $readmemb("../src/imem.bin", mem);
+    always_comb begin
+        case (addr)
+            8'd0: data_out = 16'b0101000000000000; // SET_GPIO
+            8'd1: data_out = 16'b0110000000000000; // CLR_GPIO
+            8'd2: data_out = 16'b0101000000000000; // SET_GPIO
+            8'd3: data_out = 16'b0110000000000000; // CLR_GPIO
+            default: data_out = 16'h0000;
+        endcase
     end
-
-    assign data_out = mem[addr];
 
 endmodule
