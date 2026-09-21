@@ -23,16 +23,17 @@ endmodule */
 module imem #(
     parameter int DEPTH = 256
 ) (
-    input logic [$clog2(DEPTH)-1:0] addr,
+    input  logic [$clog2(DEPTH)-1:0] addr,
     output logic [15:0] data_out
 );
 
     always_comb begin
         case (addr)
-            8'd0: data_out = 16'b0101000000000000; // SET_GPIO
-            8'd1: data_out = 16'b0110000000000000; // CLR_GPIO
-            8'd2: data_out = 16'b0101000000000000; // SET_GPIO
-            8'd3: data_out = 16'b0110000000000000; // CLR_GPIO
+            8'd0: data_out = 16'b1000000000000000;
+            8'd1: data_out = 16'b0010001000000010;
+            8'd2: data_out = 16'b0101000000000000;
+            8'd3: data_out = 16'b0110000000000000;
+
             default: data_out = 16'h0000;
         endcase
     end
